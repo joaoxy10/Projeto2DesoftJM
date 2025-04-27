@@ -73,3 +73,22 @@ def calcula_pontos_sequencia_baixa(lista):
         return 15
     else:
         return 0
+
+def calcula_pontos_sequencia_alta(lista):
+    i=0
+    lista_org=[]
+    numero=[1,2,3,4,5,6]
+    while i<len(numero):
+        i2=0
+        while i2 <len(lista):
+            if lista_org==[1,2,3,4,5] or lista_org==[2,3,4,5,6]:
+                break
+            if numero[i]==lista[i2]:
+                if  not lista[i2] in lista_org :
+                    lista_org.append(lista[i2])
+            i2=i2+1
+        i=i+1
+    if lista_org==[1,2,3,4,5] or lista_org==[2,3,4,5,6]:
+        return 30
+    else:
+        return 0
