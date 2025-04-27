@@ -37,3 +37,13 @@ def remover_dado(rolados,estoque,remover):
     resposta.append(novo_estoque)
     return resposta
 
+def calcula_pontos_regra_simples(lista):
+    numero={1:0,2:0,3:0,4:0,5:0,6:0}
+    for chave in numero.keys():
+        i=0
+        while i <len(lista):
+            if chave==lista[i]:
+                numero[chave]=numero[chave]+lista[i]
+            i=i+1
+    return numero
+
