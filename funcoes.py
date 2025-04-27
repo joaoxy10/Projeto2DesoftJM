@@ -23,3 +23,17 @@ def guardar_dado(rolados,estoque,guardar):
     resposta.append(estoque)
     return resposta
 
+def remover_dado(rolados,estoque,remover):
+    novo_estoque=[]
+    i=0
+    while i <len(estoque):
+        if i==remover:
+            rolados.append(estoque[i])
+        else:
+            novo_estoque.append(estoque[i])
+        i=i+1
+    resposta=[]
+    resposta.append(rolados)
+    resposta.append(novo_estoque)
+    return resposta
+
