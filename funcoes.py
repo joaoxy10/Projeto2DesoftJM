@@ -92,3 +92,36 @@ def calcula_pontos_sequencia_alta(lista):
         return 30
     else:
         return 0
+
+def calcula_pontos_full_house(lista):
+    lista3i=[]
+    lista2i=[]
+    i=0
+    iguais1=0
+    while i<len(lista):
+        i2=0
+        while i2<len(lista):
+            if lista[i] == lista[i2]:
+                iguais1=iguais1+1
+                lista3i.append(lista[i2])
+            if len(lista3i)==3:
+                if lista3i[0]!=lista3i[1] or lista3i[2]!=lista3i[1]:
+                    lista3i=[]
+                    iguais1=0
+                    break
+            i2=i2+1
+        if len(lista3i) == 3:
+                break
+        lista3i=[]
+        i=i+1 
+    i3=0
+    while i3 <len(lista):
+        if not lista[i3] in lista3i:
+            lista2i.append(lista[i3]) 
+        i3=i3+1
+    soma=0 
+    if len(lista3i)==3 and len(lista2i): 
+        if lista3i[0]==lista3i[1] and lista3i[2]==lista3i[1]:
+            if lista2i[0]==lista2i[1]:
+                soma=lista3i[0]+lista3i[1]+lista3i[2]+lista2i[0]+lista2i[1]
+    return soma
