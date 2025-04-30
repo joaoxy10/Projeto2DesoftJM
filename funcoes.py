@@ -144,3 +144,22 @@ def calcula_pontos_quadra(lista):
     else:
         result = 0
     return result
+
+def calcula_pontos_quina(lista):
+    quant_dados = [0, 0, 0, 0, 0, 0]
+    quina = False
+
+    for i in lista:
+        quant_dados[i-1] +=1
+    
+    for i in quant_dados:
+        if i >= 5:
+            quina = True
+    
+    if quina == True:
+        result = 50
+    else:
+        result = 0
+
+    return result
+
