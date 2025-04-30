@@ -41,7 +41,7 @@ def calcula_pontos_regra_simples(lista):
     numero={1:0,2:0,3:0,4:0,5:0,6:0}
     for chave in numero.keys():
         i=0
-        while i <len(lista):
+        while i < len(lista):
             if chave==lista[i]:
                 numero[chave]=numero[chave]+lista[i]
             i=i+1
@@ -125,3 +125,22 @@ def calcula_pontos_full_house(lista):
             if lista2i[0]==lista2i[1]:
                 soma=lista3i[0]+lista3i[1]+lista3i[2]+lista2i[0]+lista2i[1]
     return soma
+
+def calcula_pontos_quadra(lista):
+    quant_dados = [0, 0, 0, 0, 0, 0]
+    soma = 0
+    quadra = False
+    for i in lista:
+        quant_dados[(i-1)] += 1
+        
+    for i in quant_dados:
+        if i >= 4:
+            quadra = True
+    
+    if quadra == True:
+        for i in range(len(lista)):
+            soma += lista[i]
+        result = soma
+    else:
+        result = 0
+    return result
