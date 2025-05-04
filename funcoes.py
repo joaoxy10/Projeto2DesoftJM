@@ -9,7 +9,7 @@ def rolar_dados(Quantia):
         i=i+1
     return lista
 
-def guardar_dado(rolados,estoque,guardar):
+def guardar_dado(rolados, estoque, guardar):
     novo_rolados=[]
     resposta=[]
     i=0
@@ -23,7 +23,7 @@ def guardar_dado(rolados,estoque,guardar):
     resposta.append(estoque)
     return resposta
 
-def remover_dado(rolados,estoque,remover):
+def remover_dado(rolados, estoque, remover):
     novo_estoque=[]
     i=0
     while i <len(estoque):
@@ -182,4 +182,21 @@ def faz_jogada(lista, categoria, cartela):
         cartela['regra_simples'][int(categoria)] = calcula_pontos_regra_simples(lista)[int(categoria)]
     
     return cartela
+
+def imprime_cartela(cartela):
+    print("Cartela de Pontos:")
+    print("-"*25)    
+    for i in range(1, 7):
+        filler = " " * (15 - len(str(i)))
+        if cartela['regra_simples'][i] != -1:
+            print(f"| {i}: {filler}| {cartela['regra_simples'][i]:02} |")
+        else:
+            print(f"| {i}: {filler}|    |")
+    for i in cartela['regra_avancada'].keys():
+        filler = " " * (15 - len(str(i)))
+        if cartela['regra_avancada'][i] != -1:
+            print(f"| {i}: {filler}| {cartela['regra_avancada'][i]:02} |")
+        else:
+            print(f"| {i}: {filler}|    |")
+    print("-"*25)
 
