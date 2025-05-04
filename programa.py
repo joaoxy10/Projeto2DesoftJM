@@ -29,20 +29,34 @@ jogadas = 0
 
 
 
+imprime_cartela(cartela_de_pontos)
 
-
-while jogadas <= max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+while jogadas < max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     
     
     print(f'Dados rolados: {dados}')
     print(f'Dados guardados: {estoque}')
     
-    ordem = int(input("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:"))
+    
+    ordem = input("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:")
+    
+    try:
+        ordem_int = int(ordem)
+        if ordem_int in jogadas_possiveis:
+            ordem_valida = True
+        else:
+            ordem_valida = False
+    except:
+         ordem_valida = False
+    
+    
 
-    #checar valido
-    if ordem in jogadas_possiveis:
+
+
+
+    if ordem_valida == True:
         #rodar o jogo normalmente
-
+        ordem = int(ordem)
 
         #guardar dado
         if ordem == 1:
@@ -82,29 +96,64 @@ while jogadas <= max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 
-        #fazer a jogada
+        #fazer a jogada !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FAZER A JOGADA (essa parte falha tanto q precisa de um destaque extra)
         if ordem == 0:
             categoria = input("Digite a combinação desejada:") #verificar se o espaco depois do : importa ou nao!!!!!!!!!!!!
+            in_avancado = False
+            in_simples = False
+
+
+            #verificar se esta dentro de cada um
+            if categoria in cartela_de_pontos['regra_avancada']:
+                in_avancado = True
+                classe = 'regra_avancada'
+            try:
+                categoria_int = int(categoria)
+            except:
+                in_simples = False
+            else:
+                if categoria_int in cartela_de_pontos['regra_simples']:
+                    in_simples = True
+                    classe = 'regra_simples'
+            
             
 
-
             #verificar se eh valido
-            while categoria not in cartela_de_pontos['regra_avancada'] and int(categoria) not in cartela_de_pontos['regra_simples']:
+            while in_avancado == False and in_simples == False:
                 
                 print("Combinação inválida. Tente novamente.")
                 categoria = input()
+                
+                #verifica se esta dentro dnv
+                if categoria in cartela_de_pontos['regra_avancada']:
+                    in_avancado = True
+                    classe = 'regra_avancada'
+                try:
+                    categoria_int = int(categoria)
+                except:
+                    in_simples = False
+                else:
+                    if categoria_int in cartela_de_pontos['regra_simples']:
+                        in_simples = True
+                        classe = 'regra_simples'
+            
             
 
             #verificar se combinacao ja esta usada
             
             if categoria in cartela_de_pontos['regra_avancada']:
+                in_avancado = True
                 classe = 'regra_avancada'
-            elif int(categoria) in cartela_de_pontos['regra_simples']:
-                classe = 'regra_simples'
+            try:
                 categoria = int(categoria)
+            except:
+                in_simples = False
+            else:
+                if categoria in cartela_de_pontos['regra_simples']:
+                    in_simples = True
+                    classe = 'regra_simples'
                 
-                
-                
+                   
             while cartela_de_pontos[classe][categoria] != -1:
                     
                                         
@@ -117,7 +166,7 @@ while jogadas <= max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     categoria = int(categoria)
 
 
-           
+        
             
             #transplantar os dados pra um so estoque
             i = 0
@@ -127,7 +176,7 @@ while jogadas <= max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
             
-                
+            #finalmente fazer a jogada
             cartela_de_pontos = faz_jogada(dados, categoria, cartela_de_pontos) #verificar se precisa colocar o estoque junto dos dados!!!!!!!!!!!! edit: precisa
             
             
@@ -138,18 +187,7 @@ while jogadas <= max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             rolagens = 2
             invalida = False
 
-
-
-
             jogadas +=1
-
-
-
-        
-        
-
-        
-    
     else:
         print("Opção inválida. Tente novamente.")
 
@@ -166,6 +204,7 @@ bonus = 0
 #soma simples
 for i in cartela_de_pontos['regra_simples'].values():
     soma_simples += i
+
 
 #soma avancada
 for i in cartela_de_pontos['regra_avancada'].values():
