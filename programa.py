@@ -101,76 +101,41 @@ while jogadas < max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         #fazer a jogada !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FAZER A JOGADA (essa parte falha tanto q precisa de um destaque extra)
         if ordem == 0:
-            print("Digite a combinação desejada:")
-            categoria = input()
-            in_avancado = False
-            in_simples = False
-
-
-            #verificar se esta dentro de cada um
-            if categoria in cartela_de_pontos['regra_avancada']:
-                in_avancado = True
-                classe = 'regra_avancada'
-            try:
-                categoria_int = int(categoria)
-            except:
-                in_simples = False
-            else:
-                if categoria_int in cartela_de_pontos['regra_simples']:
-                    in_simples = True
-                    classe = 'regra_simples'
-            
-            
-
-            #verificar se eh valido
-            while in_avancado == False and in_simples == False:
+            reset_texto = True
+            while True:
                 
-                print("Combinação inválida. Tente novamente.")
+                if reset_texto == True:
+                    print("Digite a combinação desejada:")
                 categoria = input()
-                
-                #verifica se esta dentro dnv
+                in_avancado = False
+                in_simples = False
+
+                #atribui classe da categoria
                 if categoria in cartela_de_pontos['regra_avancada']:
                     in_avancado = True
                     classe = 'regra_avancada'
                 try:
-                    categoria_int = int(categoria)
+                    categoria = int(categoria)
                 except:
                     in_simples = False
                 else:
-                    if categoria_int in cartela_de_pontos['regra_simples']:
+                    if categoria in cartela_de_pontos['regra_simples']:
                         in_simples = True
-                        classe = 'regra_simples'
-            
-            
-
-            #verificar se combinacao ja esta usada
-            
-            if categoria in cartela_de_pontos['regra_avancada']:
-                in_avancado = True
-                classe = 'regra_avancada'
-            try:
-                categoria = int(categoria)
-            except:
-                in_simples = False
-            else:
-                if categoria in cartela_de_pontos['regra_simples']:
-                    in_simples = True
-                    classe = 'regra_simples'
+                        classe = 'regra_simples' 
                 
-                   
-            while cartela_de_pontos[classe][categoria] != -1:
-                    
-                                        
-                print("Essa combinação já foi utilizada.")
+
+                if in_avancado == False and in_simples == False:
+                    print("Combinação inválida. Tente novamente.")
+                    reset_texto = False
+                    continue
+
+                if cartela_de_pontos[classe][categoria] != -1:                                                           
+                    print("Essa combinação já foi utilizada.")
+                    reset_texto = False
+                    continue
+
+                break
                 
-                categoria = input()
-                if categoria in cartela_de_pontos['regra_avancada']:
-                    classe = 'regra_avancada'
-                elif int(categoria) in cartela_de_pontos['regra_simples']:
-                    classe = 'regra_simples'
-                    categoria = int(categoria)
-
-
         
             
             #transplantar os dados pra um so estoque
@@ -190,7 +155,7 @@ while jogadas < max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             dados = rolar_dados(5)
             estoque = []
             rolagens = 2
-            invalida = False
+            
 
             jogadas +=1
     else:
