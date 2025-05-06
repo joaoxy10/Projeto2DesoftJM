@@ -26,19 +26,20 @@ dados = rolar_dados(5)
 estoque = []
 rolagens = 2
 jogadas = 0
-
+ordem_valida = True
 
 
 imprime_cartela(cartela_de_pontos)
 
 while jogadas < max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     
+    if ordem_valida == True:
+        print(f'Dados rolados: {dados}')
+        print(f'Dados guardados: {estoque}')
+        print("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:")
+        
     
-    print(f'Dados rolados: {dados}')
-    print(f'Dados guardados: {estoque}')
-    
-    
-    ordem = input("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:")
+    ordem = input()
     
     try:
         ordem_int = int(ordem)
@@ -60,7 +61,8 @@ while jogadas < max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         #guardar dado
         if ordem == 1:
-            dado_a_guardar = int(input("Digite o índice do dado a ser guardado (0 a 4):"))
+            print("Digite o índice do dado a ser guardado (0 a 4):")
+            dado_a_guardar = int(input())
             
             result_guardar = guardar_dado(dados, estoque, dado_a_guardar)
             
@@ -70,7 +72,8 @@ while jogadas < max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         #remover dado
         if ordem == 2:
-            dado_a_remover = int(input("Digite o índice do dado a ser removido (0 a 4):"))
+            print("Digite o índice do dado a ser removido (0 a 4):")
+            dado_a_remover = int(input())#print
 
             result_remover = remover_dado(dados, estoque, dado_a_remover)
 
@@ -98,7 +101,8 @@ while jogadas < max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         #fazer a jogada !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FAZER A JOGADA (essa parte falha tanto q precisa de um destaque extra)
         if ordem == 0:
-            categoria = input("Digite a combinação desejada:") #verificar se o espaco depois do : importa ou nao!!!!!!!!!!!!
+            print("Digite a combinação desejada:")
+            categoria = input()
             in_avancado = False
             in_simples = False
 
@@ -158,6 +162,7 @@ while jogadas < max_rounds:      #while principal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     
                                         
                 print("Essa combinação já foi utilizada.")
+                
                 categoria = input()
                 if categoria in cartela_de_pontos['regra_avancada']:
                     classe = 'regra_avancada'
